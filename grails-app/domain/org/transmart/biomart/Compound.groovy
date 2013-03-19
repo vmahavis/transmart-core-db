@@ -36,6 +36,7 @@ class Compound {
 
     static hasMany=[experiments:Experiment, literatures:Literature]
 
+
     def getName(){
         if(genericName!=null)
             return genericName;
@@ -46,6 +47,7 @@ class Compound {
         if(cntoNumber!=null)
             return cntoNumber;
     }
+
 
     static mapping = {
         table 'BIO_COMPOUND'
@@ -71,7 +73,6 @@ class Compound {
     }
 
     static constraints = {
-        cntoNumber(nullable:true, maxSize:400)
         number(nullable:true, maxSize:400)
         casRegistry(nullable:true, maxSize:800)
         codeName(nullable:true, maxSize:400)
@@ -83,5 +84,6 @@ class Compound {
         description(nullable:true, maxSize:2000)
         sourceCode(nullable:true, maxSize:100)
     }
+
 
 }
