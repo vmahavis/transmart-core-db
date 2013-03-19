@@ -1,49 +1,58 @@
-// configuration for plugin testing - will not be included in the plugin zip
 
-def dataSourceConfig = new File("${userHome}/" +
-        ".grails/transmartConfig/DataSource.groovy")
+grails.project.groupId = appName
+grails.mime.file.extensions = true
+grails.mime.use.accept.header = false
+grails.mime.types = [
+        all:           '*/*',
+        atom:          'application/atom+xml',
+        css:           'text/css',
+        csv:           'text/csv',
+        form:          'application/x-www-form-urlencoded',
+        html:          ['text/html','application/xhtml+xml'],
+        js:            'text/javascript',
+        json:          ['application/json', 'text/json'],
+        multipartForm: 'multipart/form-data',
+        rss:           'application/rss+xml',
+        text:          'text/plain',
+        xml:           ['text/xml', 'application/xml']
+]
 
-if (!dataSourceConfig.exists())
-    throw new RuntimeException("Coult not find ${dataSourceConfig}")
 
-grails.config.locations = ["file:${dataSourceConfig.getAbsolutePath()}"]
+grails.resources.adhoc.patterns = ['/images/*', '/css/*', '/js/*', '/plugins/*']
+grails.views.default.codec = "none"
+grails.views.gsp.encoding = "UTF-8"
+grails.converters.encoding = "UTF-8"
+grails.views.gsp.sitemesh.preprocess = true
+grails.scaffolding.templates.domainSuffix = 'Instance'
+grails.json.legacy.builder = false
+grails.enable.native2ascii = true
+grails.spring.bean.packages = []
+grails.web.disable.multipart=false
+grails.exceptionresolver.params.exclude = ['password']
 
-/*
-Example configuration for using the reveng plugin
-grails.plugin.reveng.defaultSchema = 'i2b2demodata'
-grails.plugin.reveng.includeTables = ['qt_query_master', 'qt_query_instance',
-        'qt_query_result_instance']
-grails.plugin.reveng.packageName = 'org.transmartproject.db.querytool'
-*/
+grails.hibernate.cache.queries = false
 
-log4j = {
-    // Example of changing the log pattern for the default console
-    // appender:
-    //
-    //appenders {
-    //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
-    //}
-
-    info  'org.codehaus.groovy.grails.web.servlet',  //  controllers
-           'org.codehaus.groovy.grails.web.pages', //  GSP
-           'org.codehaus.groovy.grails.web.sitemesh', //  layouts
-           'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
-           'org.codehaus.groovy.grails.web.mapping', // URL mapping
-           'org.codehaus.groovy.grails.commons', // core / classloading
-           'org.codehaus.groovy.grails.plugins', // plugins
-           'org.codehaus.groovy.grails.orm.hibernate', // hibernate integration
-           'org.springframework',
-           'org.hibernate',
-           'net.sf.ehcache.hibernate'
-
-    info   'org.mortbay.log'
-
-    root {
-        info('stdout')
+environments {
+    development {
+        grails.logging.jul.usebridge = true
+    }
+    production {
+        grails.logging.jul.usebridge = false
     }
 }
 
-grails.converters.default.pretty.print=true
 
-grails.views.default.codec="none" // none, html, base64
-grails.views.gsp.encoding="UTF-8"
+log4j = {
+
+    error  'org.codehaus.groovy.grails.web.servlet',        // controllers
+            'org.codehaus.groovy.grails.web.pages',          // GSP
+            'org.codehaus.groovy.grails.web.sitemesh',       // layouts
+            'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
+            'org.codehaus.groovy.grails.web.mapping',        // URL mapping
+            'org.codehaus.groovy.grails.commons',            // core / classloading
+            'org.codehaus.groovy.grails.plugins',            // plugins
+            'org.codehaus.groovy.grails.orm.hibernate',      // hibernate integration
+            'org.springframework',
+            'org.hibernate',
+            'net.sf.ehcache.hibernate'
+}
